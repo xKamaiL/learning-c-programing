@@ -3,57 +3,93 @@
 
 int main(void)
 {
-	int max = 0, isInvalid = 0;
-	printf("How many values (max=10): ");
-	// get max value
+	int max, isInvalid;
+	printf("How many studens (max=10): ");
 	scanf("%d", &max);
-	// initial array by max size
-	int data[max];
-	printf("Enter data: ");
-	// loop according to max size
+	if (max > 10 || max < 0)
+	{
+		printf("max value is in-valid.");
+		return 0;
+	}
+	int ids[max], maxScore = 0, minScore = 100, total = 0;
+	int marks[max];
+	char grades[max];
+	int frequency['G'];
+
 	for (int i = 0; i < max; i++)
 	{
-		// scan into data[index]
-		scanf("%d", &data[i]);
-		if (0 < data[i] && data[i] > 100)
+		printf("Enter id and marks of student no.%d: ", i + 1);
+		scanf("%d %d", &ids[i], &marks[i]);
+		if (marks[i] < 0 || marks[i] > 100)
 		{
 			isInvalid = 1;
-			printf("Value is invalid.\n");
+			printf("Invalid marks\n");
 			break;
 		}
+		int mark = marks[i];
+
+		if (maxScore < mark)
+		{
+			maxScore = mark;
+		}
+		if (mark <= minScore)
+		{
+			minScore = mark;
+		}
+
+		total = total + mark;
+		if (mark >= 80)
+		{
+			grades[i] = 'A';
+		}
+		else if (mark >= 70 && mark <= 79)
+		{
+			grades[i] = 'B';
+		}
+		else if (mark >= 60 && mark <= 69)
+		{
+			grades[i] = 'C';
+		}
+		else if (mark >= 50 && mark <= 59)
+		{
+			grades[i] = 'D';
+		}
+		else
+		{
+			grades[i] = 'F';
+		}
+		frequency[grades[i]]++;
 	}
 	if (isInvalid == 1)
 	{
 		return 0;
 	}
-	printf("Sorted data: ");
-	// start sorting
-	// order from last position to first
-	for (int i = 0; i < max - 1; i++)
-	{
-		// the last i elements are already in right position
-		for (int j = 0; j < max - i - 1; j++)
-		{
-			// check if next value is higher than or not
-			if (data[j] > data[j + 1])
-			{
-				// if j + 1 is higher
-				// swap the position
-				// j + 1 to j
-				// j to j + 1
-				int temp = data[j + 1];
-				data[j + 1] = data[j];
-				data[j] = temp;
-			}
-		}
-	}
-	// print the result of sorted array
+	printf("_________________________________________________\n");
+	printf("|\tid\t|\tmark\t|\tgrade\t|\n");
+	printf("-------------------------------------------------\n");
 	for (int i = 0; i < max; i++)
 	{
-		printf("%d ", data[i]);
+		printf("|\t%d\t|\t%d\t|\t%c\t|\n", ids[i], marks[i], grades[i]);
 	}
-	// new line
+	float mean = total / max;
+	printf("-------------------------------------------------\n");
+	printf("|\tmax\t|\tmin\t|\tmean\t|\n");
+	printf("|\t%d\t|\t%d\t|\t%.2f\t|\n", maxScore, minScore, mean);
+	printf("-------------------------------------------------\n");
+	for (int i = 'A'; i <= 'F'; i++)
+	{
+		int show = frequency[i];
+		if (show < 0 || show > max)
+		{
+			printf("Invalid show: %d",show);
+			show = 0;
+		}
+		printf("%c=%d", i, show);
+		if (i < 'F')
+		{
+			printf(", ");
+		}
+	}
 	printf("\n");
-
 	return 0;
 }
