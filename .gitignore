@@ -1,3 +1,6 @@
 .vscode
 /a.out
 /main
+.DS_Store
+.idea
+*/.DS_Store
