@@ -1,3 +1,0 @@
-/Users/xkamail/Projects/CProgaming/hello-world/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/xkamail/Projects/CProgaming/hello-world/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/xkamail/Projects/CProgaming/hello-world/cmake-build-debug/CMakeFiles/hello_world.dir
